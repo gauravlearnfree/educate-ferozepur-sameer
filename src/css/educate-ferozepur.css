@@ -582,8 +582,8 @@ strong {
 }
 
 #hero-slide .carousel-caption {
-  background: var(--white-color);
-  clip-path: polygon(100% 100%, 100% 150px, 0 100%);
+  /*background: var(--white-color);
+  clip-path: polygon(100% 100%, 100% 150px, 0 100%);*/
   color: var(--secondary-color);
   top: 1px;
   bottom: -1px;
@@ -633,6 +633,16 @@ strong {
 .carousel-control-next-icon:hover, 
 .carousel-control-prev-icon:hover {
   background-color: var(--primary-color);
+}
+
+
+#hero-slide .carousel-caption h2, #hero-slide .carousel-caption p {
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
 }
 
 
