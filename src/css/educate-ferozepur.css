@@ -645,6 +645,23 @@ strong {
     font-weight: bold;
 }
 
+.rectangle {
+  position: relative;
+  width: auto;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.rectangle:before {
+  content: '';
+  position: absolute;
+  left: -80px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 80px solid #009FC8;
+  border-bottom: 40px solid transparent;
+}
 
 /*---------------------------------------
   FEATURE BLOCK              
@@ -1608,11 +1625,18 @@ blockquote::before {
   }
 
   #hero-slide .carousel-caption {
-    clip-path: polygon(100% 100%, 100% 100px, 0 100%);
+    /*clip-path: polygon(100% 100%, 100% 100px, 0 100%);*/
     padding-right: 50px;
     min-width: inherit;
     min-height: inherit;
   }
+  .rectangle {
+    height: 45px;
+  }
+  .rectangle:before {
+    border-left: 45px solid #fff;
+  }
+
 }
 
 @media screen and (max-width: 480px) {
