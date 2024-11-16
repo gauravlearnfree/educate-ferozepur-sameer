@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
- prJob:    
+  prJob:    
     name: Print info
     runs-on: ubuntu-latest
     steps:
