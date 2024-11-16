@@ -32,7 +32,7 @@ jobs:
           lfs: false
       - name: Build And Deploy Preview
         if: github.ref != 'refs/heads/main'
-        id: builddeploy
+        id: builddeploypreview
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUSHROOM_0507F890F }}
@@ -47,7 +47,7 @@ jobs:
           deployment_environment: "preview"
       - name: Build And Deploy Production
         if: github.ref == 'refs/heads/main'
-        id: builddeploy
+        id: builddeployprod
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUSHROOM_0507F890F }}
