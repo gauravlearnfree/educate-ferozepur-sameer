@@ -3,13 +3,24 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - main
+      - '**'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
 
 jobs:
+  prJob:    
+    name: Print info
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print context object
+        uses: actions/github-script@v6
+        with:
+          script: |
+           // Print the entire context object
+            console.log(JSON.stringify(context, null, 2));
+
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
@@ -19,8 +30,9 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - name: Build And Deploy
-        id: builddeploy
+      - name: Build And Deploy Preview
+        if: github.ref != 'refs/heads/main'
+        id: builddeploypreview
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUSHROOM_0507F890F }}
@@ -33,6 +45,21 @@ jobs:
           output_location: "/src" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
           deployment_environment: "preview"
+      - name: Build And Deploy Production
+        if: github.ref == 'refs/heads/main'
+        id: builddeployprod
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUSHROOM_0507F890F }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/src" # App source code path
+          api_location: "api" # Api source code path - optional
+          output_location: "/src" # Built app content directory - optional
+          ###### End of Repository/Build Configurations ######
+          deployment_environment: "Production"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -45,4 +72,3 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MUSHROOM_0507F890F }}
           action: "close"
-          deployment_environment: "Production"
