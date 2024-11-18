@@ -29,5 +29,15 @@
 });
     
   })(window.jQuery);
+  
+$(document).ready(function() {
+	//$("div#eapps-linkedin-feed-d9ca04de-e6a9-4c22-840b-f01d9999088c a[href*='elfsight.com']").hide();
+	//$("div#eapps-instagram-feed-1 a[href*='elfsight.com']").hide();
+	setTimeout(function(){
+		$("div#eapps-linkedin-feed-d9ca04de-e6a9-4c22-840b-f01d9999088c a[href*='elfsight.com']").hide();
+		$("div#eapps-instagram-feed-1 a[href*='elfsight.com']").hide();
+    }, 3000);
+});
+
 
 
